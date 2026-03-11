@@ -1,0 +1,1 @@
+create table Manideep(no int, name varchar(100));

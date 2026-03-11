@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Bank Guarantee List</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link
+	href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+	rel="stylesheet">
+ 
+<style>
+h2 {
+	color: #0077b6;
+	font-weight: 600;
+	margin-bottom: 20px;
+	text-align: center;
+}
+ 
+.table-card {
+	background: #fff;
+	border-radius: 12px;
+	padding: 20px;
+	box-shadow: 0 6px 16px rgba(0, 0, 0, 0.08);
+}
+ 
+.btn-primary {
+	background: #0077b6;
+	border: none;
+}
+ 
+.btn-primary:hover {
+	background: #005f8e;
+}
+ 
+.btn-secondary {
+	background: #6c757d;
+	border: none;
+}
+ 
+.text-muted {
+	font-style: italic;
+}
+ 
+:root {
+	/* Dark Theme Colors */
+	--bg-color-main: #1a202c;
+	--bg-color-navbar: #1a202c;
+	--bg-color-card: #2d3748;
+	--border-color-card: #4a5568;
+	--text-color-main: #e2e8f0;
+	--text-color-secondary: #a0aec0;
+	--border-color-divider: #2d3748;
+	--shadow-navbar: rgba(0, 0, 0, 0.4);
+	--shadow-card: rgba(0, 0, 0, 0.3);
+}
+ 
+/* Light Theme overrides for the custom properties */
+body.light-mode {
+	--bg-color-main: #f7fafc;
+	--bg-color-navbar: #ffffff;
+	--bg-color-card: #ffffff;
+	--border-color-card: #e2e8f0;
+	--text-color-main: #2d3748;
+	--text-color-secondary: #718096;
+	--border-color-divider: #e2e8f0;
+	--shadow-navbar: rgba(0, 0, 0, 0.1);
+	--shadow-card: rgba(0, 0, 0, 0.08);
+	background: linear-gradient(to right, #e0f7fa, #fdfdfd);
+}
+ 
+/* Base styles using CSS variables */
+body {
+	background-color: var(--bg-color-main);
+	color: var(--text-color-main);
+	font-family: 'Inter', sans-serif;
+	transition: background-color 0.3s ease, color 0.3s ease;
+}
+ 
+.navbar {
+	background-color: var(--bg-color-navbar) !important;
+	box-shadow: 0 4px 12px var(--shadow-navbar);
+	border-bottom: 1px solid var(--border-color-divider);
+	transition: all 0.3s ease;
+}
+ 
+/* New style for the light mode navbar */
+body.light-mode .navbar {
+	background-color: var(--bg-color-navbar) !important;
+	/* This will be #ffffff */
+	box-shadow: 0 4px 12px var(--shadow-navbar);
+	/* This will be rgba(0,0,0,0.1) */
+	border-bottom: 1px solid var(--border-color-divider);
+}
+ 
+.navbar-brand {
+	color: #63b3ed !important;
+	font-weight: 700;
+}
+ 
+.nav-logo {
+	height: 40px;
+	width: auto;
+	border-radius: 8px;
+}
+ 
+.nav-link {
+	font-weight: 500;
+	color: var(--text-color-secondary) !important;
+	transition: all 0.3s ease-in-out;
+}
+ 
+.nav-link:hover {
+	color: var(--text-color-main) !important;
+}
+ 
+.dropdown-menu {
+	background-color: var(--bg-color-card);
+	border: 1px solid var(--border-color-card);
+	border-radius: 10px;
+}
+ 
+.dropdown-item {
+	color: var(--text-color-main);
+	transition: background-color 0.2s ease;
+}
+ 
+.dropdown-item:hover {
+	background-color: var(--border-color-card);
+	color: var(--text-color-main);
+}
+ 
+.dashboard-title {
+	margin-top: 40px;
+	margin-bottom: 10px;
+	color: var(--text-color-main);
+	font-weight: 700;
+}
+ 
+.dashboard-subtitle {
+	color: var(--text-color-secondary) !important;
+}
+ 
+.card {
+	background-color: var(--bg-color-card);
+	color: var(--text-color-main);
+	border: 1px solid var(--border-color-card);
+	border-radius: 15px;
+	transition: transform 0.2s ease, box-shadow 0.2s ease, background-color
+		0.3s ease, color 0.3s ease;
+	min-height: 220px;
+}
+ 
+.card:hover {
+	transform: translateY(-5px);
+	box-shadow: 0 10px 20px var(--shadow-card);
+}
+ 
+.card-title {
+	font-size: 1.4rem;
+	font-weight: 600;
+}
+ 
+.card-text {
+	font-size: 0.95rem;
+	color: var(--text-color-secondary);
+}
+ 
+.form-check-label {
+	color: var(--text-color-main) !important;
+}
+ 
+@media ( max-width : 576px) {
+	.dashboard-title {
+		font-size: 1.5rem;
+	}
+}
+</style>
+</head>
+<body>
+	<nav class="navbar navbar-expand-lg navbar-dark bg-dark py-3">
+		<div class="container-fluid">
+			<!-- Logo -->
+			<a class="navbar-brand d-flex align-items-center" href="/"> <!-- Placeholder for your logo, similar to the original image reference -->
+				<img src="/img/download2.png" alt="Company Logo"
+				class="nav-logo me-2"> TFMS
+			</a>
+ 
+			<button class="navbar-toggler" type="button"
+				data-bs-toggle="collapse" data-bs-target="#navbarMenu">
+				<span class="navbar-toggler-icon"></span>
+			</button>
+ 
+			<div class="collapse navbar-collapse" id="navbarMenu">
+				<ul class="navbar-nav ms-auto">
+					<li class="nav-item"><a class="nav-link" href="/">Dashboard</a></li>
+					<li class="nav-item dropdown"><a
+						class="nav-link dropdown-toggle" href="#" id="featuresDropdown"
+						role="button" data-bs-toggle="dropdown" aria-expanded="false">
+							Features </a>
+						<ul class="dropdown-menu" aria-labelledby="featuresDropdown">
+							<li><a class="dropdown-item" th:href="@{/lc/list}">Letters
+									of Credit</a></li>
+							<!-- Thymeleaf: href="@{/lc/list}" -->
+							<li><a class="dropdown-item" th:href="@{/guarantees/list}">Bank
+									Guarantees</a></li>
+							<!-- Thymeleaf: href="@{/guarantees/list}" -->
+							<li><a class="dropdown-item" th:href="@{/documents/list}">Trade
+									Documentation</a></li>
+							<!-- Thymeleaf: href="@{/documents/list}" -->
+							<li><hr class="dropdown-divider"></li>
+							<li><a class="dropdown-item" th:href="@{/risk/list}">Risk
+									Assessment</a></li>
+							<!-- Thymeleaf: href="@{/risk/list}" -->
+							<li><a class="dropdown-item" th:href="@{/compliance}">Compliance</a></li>
+							<!-- Thymeleaf: href="@{/compliance}" -->
+						</ul></li>
+					<!-- Theme Switch Toggle -->
+					<li class="nav-item d-flex align-items-center me-3">
+						<div class="form-check form-switch me-2">
+							<input class="form-check-input" type="checkbox" id="themeSwitch"
+								checked>
+						</div> <label class="form-check-label text-white" for="themeSwitch">Dark
+							Mode</label>
+					</li>
+					<li class="nav-item"><a class="nav-link" href="/help">Help</a></li>
+				</ul>
+			</div>
+		</div>
+	</nav>
+ 
+	<!-- Custom JavaScript for theme switching -->
+	<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const body = document.body;
+        const themeSwitch = document.getElementById('themeSwitch');
+        const themeLabel = document.querySelector('label[for="themeSwitch"]');
+        const isLightMode = localStorage.getItem('theme') === 'light';
+ 
+        if (isLightMode) {
+            body.classList.add('light-mode');
+            themeSwitch.checked = false;
+            themeLabel.textContent = 'Light Mode';
+        } else {
+            body.classList.remove('light-mode');
+            themeSwitch.checked = true;
+            themeLabel.textContent = 'Dark Mode';
+        }
+ 
+        themeSwitch.addEventListener('change', () => {
+            if (themeSwitch.checked) {
+                body.classList.remove('light-mode');
+                themeLabel.textContent = 'Dark Mode';
+                localStorage.setItem('theme', 'dark');
+            } else {
+                body.classList.add('light-mode');
+                themeLabel.textContent = 'Light Mode';
+                localStorage.setItem('theme', 'light');
+            }
+        });
+    });
+</script>
+	<br>
+	<br>
+ 
+ 
+	<script>
+    function confirmIssue(event, id) {
+      if (!confirm('Issue Guarantee #' + id + '?')) {
+        event.preventDefault();
+      }
+    }
+  </script>
+ 
+	<div class="container">
+		<h2>Bank Guarantee List</h2>
+ 
+		<div th:if="${message}"
+			class="alert alert-info alert-dismissible fade show" role="alert">
+			<span th:text="${message}"></span>
+			<button type="button" class="btn-close" data-bs-dismiss="alert"
+				aria-label="Close"></button>
+		</div>
+ 
+		<div class="table-card">
+			<div class="d-flex justify-content-between align-items-center mb-3">
+				<a th:href="@{/guarantees/request}" class="btn btn-primary">Request
+					New Guarantee</a>
+			</div>
+ 
+			<table class="table table-bordered table-striped">
+				<thead class="table-dark">
+					<tr>
+						<th>ID</th>
+						<th>Applicant</th>
+						<th>Beneficiary</th>
+						<th>Amount</th>
+						<th>Currency</th>
+						<th>Validity</th>
+						<th>Status</th>
+						<th>Actions</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr th:each="g : ${guarantees}">
+						<td th:text="${g.guaranteeId}"></td>
+						<td th:text="${g.applicantName}"></td>
+						<td th:text="${g.beneficiaryName}"></td>
+						<td
+							th:text="${#numbers.formatDecimal(g.guaranteeAmount, 1, 'COMMA', 2, 'POINT')}"></td>
+						<td th:text="${g.currency}"></td>
+						<td th:text="${g.validityPeriod}"></td>
+						<td th:text="${g.status}"></td>
+						<td>
+							<div class="d-flex gap-1">
+								<div th:if="${g.status.name() == 'Pending'}">
+									<form th:action="@{'/guarantees/issue/' + ${g.guaranteeId}}"
+										method="post">
+										<button type="submit" class="btn btn-warning btn-sm"
+											th:onclick="'return confirmIssue(event, ' + ${g.guaranteeId} + ');'">Issue</button>
+									</form>
+								</div>
+								<a th:href="@{'/guarantees/track/' + ${g.guaranteeId}}"
+									class="btn btn-info btn-sm">Track</a>
+							</div>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+ 
+			<a th:href="@{/dashboard}" class="btn btn-secondary"
+				data-bs-toggle="tooltip" data-bs-placement="right"
+				title="Return to Home"> <svg xmlns="http://www.w3.org/2000/svg"
+					width="16" height="16" fill="currentColor"
+					class="bi bi-arrow-left-circle me-1" viewBox="0 0 16 16">
+          <path fill-rule="evenodd"
+						d="M8 0a8 8 0 1 0 0 16A8 8 0 0 0 8 0zm3.5 8a.5.5 0 0 1-.5.5H5.707l1.147 1.146a.5.5 0 0 1-.708.708l-2-2a.5.5 0 0 1 0-.708l2-2a.5.5 0 1 1 .708.708L5.707 7.5H11a.5.5 0 0 1 .5.5z" />
+        </svg> Back to Home
+			</a>
+		</div>
+	</div>
+ 
+	<script
+		src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
+ 
+ 

@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Help - TFMS</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+   
+    .section-title {
+        margin-top: 40px;
+        margin-bottom: 20px;
+        color: #343a40;
+    }
+    .faq-item {
+        margin-bottom: 30px;
+    }
+    .faq-item h5 {
+        color: #0d6efd;
+    }
+    .back-button {
+        margin-top: 40px;
+    }
+    .header {
+        background-color: #ffffff;
+        padding: 20px 0;
+        border-bottom: 1px solid #dee2e6;
+        position: sticky;
+        top: 0;
+        z-index: 1000;
+    }
+    .nav-logo {
+    height: 50px; /* Adjust height as needed */
+    width: auto; /* Maintain aspect ratio */
+    margin-right: 10px; /* Add some space if needed */
+}
+ :root {
+        /* Dark Theme Colors */
+        --bg-color-main: #1a202c;
+        --bg-color-navbar: #1a202c;
+        --bg-color-card: #2d3748;
+        --border-color-card: #4a5568;
+        --text-color-main: white;
+        --text-color-secondary :  #718096;
+        --border-color-divider: rgb(192, 192, 192);
+        --shadow-navbar: rgba(0, 0, 0, 0.4);
+        --shadow-card: rgba(0, 0, 0, 0.3);
+        background:  #1a202c;
+    }
+
+    /* Light Theme overrides for the custom properties */
+    body.light-mode {
+        --bg-color-main: #f7fafc;
+        --bg-color-navbar: #ffffff;
+        --bg-color-card: #ffffff;
+        --border-color-card: #e2e8f0;
+        --text-color-main: black;
+        --text-color-secondary: #718096;
+        --border-color-divider: #e2e8f0;
+        --shadow-navbar: rgba(0, 0, 0, 0.1);
+        --shadow-card: rgba(0, 0, 0, 0.08);
+    }
+
+    /* Base styles using CSS variables */
+    body {
+        background-color: var(--bg-color-main);
+        color: var(--text-color-main);
+        font-family: 'Inter', sans-serif;
+        transition: background-color 0.3s ease, color 0.3s ease;
+    }
+
+    .navbar {
+        background-color: var(--bg-color-navbar) !important;
+        box-shadow: 0 4px 12px var(--shadow-navbar);
+        border-bottom: 1px solid var(--border-color-divider);
+        transition: all 0.3s ease;
+    }
+
+    /* New style for the light mode navbar */
+    body.light-mode .navbar {
+        background-color: var(--bg-color-navbar) !important; /* This will be #ffffff */
+        box-shadow: 0 4px 12px var(--shadow-navbar); /* This will be rgba(0,0,0,0.1) */
+        border-bottom: 1px solid var(--border-color-divider);
+    }
+
+    .navbar-brand {
+        color: #63b3ed !important;
+        font-weight: 700;
+    }
+
+    .nav-logo {
+        height: 40px;
+        width: auto;
+        border-radius: 8px;
+    }
+
+    .nav-link {
+        font-weight: 500;
+        color: var(--text-color-secondary) !important;
+        transition: all 0.3s ease-in-out;
+    }
+
+    .nav-link:hover {
+        color: var(--text-color-main) !important;
+    }
+
+    .dropdown-menu {
+        background-color: var(--bg-color-card);
+        border: 1px solid var(--border-color-card);
+        border-radius: 10px;
+    }
+
+    .dropdown-item {
+        color: var(--text-color-main);
+        transition: background-color 0.2s ease;
+    }
+
+    .dropdown-item:hover {
+        background-color: var(--border-color-card);
+        color: var(--text-color-main);
+    }
+
+    .dashboard-title {
+        margin-top: 40px;
+        margin-bottom: 10px;
+        color: var(--text-color-main);
+        font-weight: 700;
+    }
+
+    .dashboard-subtitle {
+        color: var(--text-color-secondary) !important;
+    }
+
+    .card {
+        background-color: var(--bg-color-card);
+        color: var(--text-color-main);
+        border: 1px solid var(--border-color-card);
+        border-radius: 15px;
+        transition: transform 0.2s ease, box-shadow 0.2s ease, background-color 0.3s ease, color 0.3s ease;
+        min-height: 220px;
+    }
+
+    .card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 20px var(--shadow-card);
+    }
+
+    .card-title {
+        font-size: 1.4rem;
+        font-weight: 600;
+    }
+
+    .card-text {
+        font-size: 0.95rem;
+        color: var(--text-color-secondary);
+    }
+
+    .form-check-label {
+        color: var(--text-color-main) !important;
+    }
+
+    /* Button styles remain consistent for both themes */
+    .btn-primary { background-color: #63b3ed; border-color: #63b3ed; font-weight: 600; border-radius: 8px; transition: all 0.3s ease; }
+    .btn-primary:hover { background-color: #4299e1; border-color: #4299e1; }
+    .btn-success { background-color: #48bb78; border-color: #48bb78; font-weight: 600; border-radius: 8px; }
+    .btn-success:hover { background-color: #38a169; border-color: #38a169; }
+    .btn-info { background-color: #4fd1c5; border-color: #4fd1c5; font-weight: 600; border-radius: 8px; }
+    .btn-info:hover { background-color: #38b2ac; border-color: #38b2ac; }
+    .btn-warning { background-color: #ecc94b; border-color: #ecc94b; font-weight: 600; border-radius: 8px; }
+    .btn-warning:hover { background-color: #d69e2e; border-color: #d69e2e; }
+    .btn-danger { background-color: #f56565; border-color: #f56565; font-weight: 600; border-radius: 8px; }
+    .btn-danger:hover { background-color: #e53e3e; border-color: #e53e3e; }
+
+    @media (max-width: 576px) {
+        .dashboard-title {
+            font-size: 1.5rem;
+        }
+    }
+</style>
+</head>
+<body>
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark py-3">
+    <div class="container-fluid">
+        <!-- Logo -->
+        <a class="navbar-brand d-flex align-items-center" href="/">
+            <!-- Placeholder for your logo, similar to the original image reference -->
+            <img src="/img/download2.png" alt="Company Logo" class="nav-logo me-2">
+            TFMS
+        </a>
+
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarMenu">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarMenu">
+            <ul class="navbar-nav ms-auto">
+                <li class="nav-item"><a class="nav-link" href="/">Dashboard</a></li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="featuresDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        Features
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="featuresDropdown">
+                        <li><a class="dropdown-item" th:href="@{/lc/list}">Letters of Credit</a></li> <!-- Thymeleaf: href="@{/lc/list}" -->
+                        <li><a class="dropdown-item" th:href="@{/guarantees/list}">Bank Guarantees</a></li> <!-- Thymeleaf: href="@{/guarantees/list}" -->
+                        <li><a class="dropdown-item" th:href="@{/documents/list}">Trade Documentation</a></li> <!-- Thymeleaf: href="@{/documents/list}" -->
+                        <li><hr class="dropdown-divider"></li>
+                        <li><a class="dropdown-item" th:href="@{/risk/list}">Risk Assessment</a></li> <!-- Thymeleaf: href="@{/risk/list}" -->
+                        <li><a class="dropdown-item" th:href="@{/compliance}">Compliance</a></li> <!-- Thymeleaf: href="@{/compliance}" -->
+                    </ul>
+                </li>
+                <!-- Theme Switch Toggle -->
+                <li class="nav-item d-flex align-items-center me-3">
+                    <div class="form-check form-switch me-2">
+                        <input class="form-check-input" type="checkbox" id="themeSwitch" checked>
+                    </div>
+                    <label class="form-check-label text-white" for="themeSwitch">Dark Mode</label>
+                </li>
+                <li class="nav-item"><a class="nav-link" href="/help">Help</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<!-- Custom JavaScript for theme switching -->
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const body = document.body;
+        const themeSwitch = document.getElementById('themeSwitch');
+        const themeLabel = document.querySelector('label[for="themeSwitch"]');
+        const isLightMode = localStorage.getItem('theme') === 'light';
+
+        if (isLightMode) {
+            body.classList.add('light-mode');
+            themeSwitch.checked = false;
+            themeLabel.textContent = 'Light Mode';
+        } else {
+            body.classList.remove('light-mode');
+            themeSwitch.checked = true;
+            themeLabel.textContent = 'Dark Mode';
+        }
+
+        themeSwitch.addEventListener('change', () => {
+            if (themeSwitch.checked) {
+                body.classList.remove('light-mode');
+                themeLabel.textContent = 'Dark Mode';
+                localStorage.setItem('theme', 'dark');
+            } else {
+                body.classList.add('light-mode');
+                themeLabel.textContent = 'Light Mode';
+                localStorage.setItem('theme', 'light');
+            }
+        });
+    });
+</script>
+<br>
+<br>
+    <!-- Sticky Header -->
+    <div class="header text-center">
+        <h2 class="section-title">Help & Support – Trade Finance Management System</h2>
+        <p class="text-muted">Find answers to common questions and learn how to use each module effectively.</p>
+    </div>
+
+    <div class="container py-4">
+        <!-- Letter of Credit -->
+        <div class="faq-item">
+            <h5>📄 How do I create a new Letter of Credit (LC)?</h5>
+            <p>Go to the <strong>Letter of Credit</strong> module and click "Manage". Then select "Create New LC". Fill in the beneficiary details, amount, terms, and submit for approval. You can also amend or close existing LCs from the same section.</p>
+        </div>
+
+        <!-- Bank Guarantee -->
+        <div class="faq-item">
+            <h5>🏦 How do I issue or track a Bank Guarantee?</h5>
+            <p>In the <strong>Bank Guarantee</strong> module, click "Manage" to view issued guarantees. Use "Create New" to initiate a new guarantee. You can track expiry dates, beneficiary info, and status updates from the dashboard.</p>
+        </div>
+
+        <!-- Trade Documentation -->
+        <div class="faq-item">
+            <h5>📁 How do I upload trade documents?</h5>
+            <p>Navigate to the <strong>Trade Documentation</strong> module and click "Manage". Use the upload feature to add invoices, shipping documents, contracts, and other relevant files. All documents are stored securely and can be searched by transaction ID.</p>
+        </div>
+
+        <!-- Risk Assessment -->
+        <div class="faq-item">
+            <h5>⚠️ How is risk assessed in TFMS?</h5>
+            <p>The <strong>Risk Assessment</strong> module analyzes transaction history, counterparty ratings, and exposure limits. Click "Assess" to generate a risk score and view recommendations. This helps in making informed decisions before proceeding with a trade.</p>
+        </div>
+
+        <!-- Compliance -->
+        <div class="faq-item">
+            <h5>✅ What is required for compliance?</h5>
+            <p>In the <strong>Compliance</strong> module, upload KYC documents, trade licenses, and audit reports. The system checks for alignment with international trade regulations. You’ll be notified of any missing or outdated documents.</p>
+        </div>
+
+        <!-- Troubleshooting -->
+        <div class="faq-item">
+            <h5>🛠️ Troubleshooting Tips</h5>
+            <ul>
+                <li>If a module doesn't load, try refreshing the page or clearing your browser cache.</li>
+                <li>Ensure you're logged in with the correct role (e.g., Admin, Trader, Auditor) to access specific modules.</li>
+                <li>For file upload issues, check that your document format is supported (.pdf, .docx, .xlsx).</li>
+            </ul>
+        </div>
+
+        <!-- Contact Support -->
+        <div class="faq-item">
+            <h5>📞 Need more help?</h5>
+            <p>Visit the <a th:href="@{/contact}">Contact</a> page to reach our support team via email, phone, or live chat.</p>
+        </div>
+
+        <!-- Back to Homepage Button -->
+        <div class="back-button text-center">
+            <a th:href="@{/}" class="btn btn-outline-primary">
+                ← Back to Homepage
+            </a>
+        </div>
+    </div>
+    <!-- Bootstrap JS Bundle -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    
+</body>
+</html>

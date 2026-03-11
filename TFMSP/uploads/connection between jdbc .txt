@@ -1,0 +1,10 @@
+connection between jdbc 
+adding dependinces
+import statement
+
+1-load the driver class
+2-register the drivers
+3-establish a connection
+4- create statement
+5-execute statement
+6-close the connection if we a try catch

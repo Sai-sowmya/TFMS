@@ -1,0 +1,35 @@
+1)list,set
+2)list:list is a interface 
+3)set and map are interfaces
+
+List l=new List();
+
+implentions class of list implemention
+linked list,array list,vector
+shifting of byte in array list
+if we are using search based operation array list is best as it uses indexes.
+if we need to insert in between then linked list is best arraylist is not good choice.
+linkedlist uses node method if we are using to delecte and add in middle then ll is used.
+vector is used for multiple environment(maily used in threads).
+  
+
+Set 
+HashSet and TreeSet
+HashSet is a unorderd and no duplicates,uses hashmap internally , allow one null value,it is fast as no sorting is doing.
+TressSet is orderd.treeset uses tree map internally.not allow null value.
+
+Map
+HashMap and TreeMap
+HashMap is no order ,allow one null key not null value
+TreeMap is ordered ,no
+ 
+HashTable is used for threaded ,thread safety.
+ Collections.sort(l);
+Collections.synchronized(l);
+
+
+Comparable and comaparator both are interfaces
+Comparable is used default sorting default sorting it has only one method comapareTo(Object o1).
+Comaparator is meant for custom sorting it has only one method that is compare(Object o1, Object obj2).
+
+
